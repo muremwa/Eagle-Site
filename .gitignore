@@ -1,0 +1,5 @@
+*pyc
+eagle/.idea
+eagle/media/
+*pdf
+eagle/db.sqlite3
