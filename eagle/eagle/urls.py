@@ -10,6 +10,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', wing_views.Home.as_view(), name='home'),
+
+    path('about/', wing_views.Resume.as_view(), name='resume'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
