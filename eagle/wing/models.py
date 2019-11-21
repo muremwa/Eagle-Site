@@ -30,3 +30,15 @@ class Portfolio(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class UserMessage(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=400)
+    message = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+    objects = models.Manager()
+
+    def __str__(self):
+        return "Message from {}".format(self.name)

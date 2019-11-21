@@ -9,9 +9,15 @@ from wing import views as wing_views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('', wing_views.Home.as_view(), name='home'),
+    path('', wing_views.HomePage.as_view(), name='home'),
 
-    path('about/', wing_views.Resume.as_view(), name='resume'),
+    path('about/', wing_views.ResumePage.as_view(), name='resume'),
+
+    path('services/', wing_views.ServicesPage.as_view(), name='services'),
+
+    path('portfolio/', wing_views.PortfolioPage.as_view(), name='portfolio'),
+
+    path('contact/', wing_views.ContactPage.as_view(), name='contact'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
