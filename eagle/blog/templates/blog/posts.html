@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Blog - All Posts{% endblock title %}
+
+{% block content %}
+<section class="ftco-section">
+  <div class="container mt-5">
+      <div class="row justify-content-center mb-5 pb-5">
+    <div class="col-md-7 text-center heading-section ftco-animate">
+      <span>Blog</span>
+      <h2>Read our blog</h2>
+    </div>
+  </div>
+    <div class="row">
+      {% if posts %}
+      {% for post in posts %}
+      <!-- Blog entry -->
+      <div class="col-md-4 ftco-animate">
+        <div class="blog-entry">
+          <a href="blog-single.html" class="block-20" style="background-image: url('{{ post.feature_image.url }}');">
+          </a>
+          <div class="text p-4 d-block">
+            <div class="meta mb-3">
+              <div><a href="#">{{ post.get_date }}</a></div>
+              <div><a href="#">{{ post.author.name }}</a></div>
+              <div><a href="#" class="meta-chat"><span class="icon-chat"></span> {{ post.comment_set.count }}</a></div>
+            </div>
+            <h3 class="heading"><a href="#">{{ post.title }}</a></h3>
+          </div>
+        </div>
+      </div>
+      <!-- End of entry -->
+      {% endfor %}
+      {% else %}
+      <div class="col-md-12 text-center heading-section ftco-animate">
+      <span>coming soon</span>
+      <h2>No posts for now</h2>
+      </div>
+      {% endif %}
+      
+    </div>
+
+    
+    {% comment %} <div class="row mt-5">
+      <div class="col text-center">
+        <div class="block-27">
+          <ul>
+            <li><a href="#">&lt;</a></li>
+            <li class="active"><span>1</span></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&gt;</a></li>
+          </ul>
+        </div>
+      </div>
+    </div> {% endcomment %}
+  </div>
+</section>
+{% endblock content %}
