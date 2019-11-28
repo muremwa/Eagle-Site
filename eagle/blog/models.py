@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.shortcuts import reverse
 
 # authors of a post
 class Author(models.Model):
@@ -44,6 +45,11 @@ class Post(models.Model):
         self.slug = slugify(self.title)
         return super().save()
 
+    def get_absolute_url(self):
+        return reverse('blog:post', kwargs={
+            'slug':self.slug,
+        })
+
 
 # each entry
 class Entry(models.Model):
@@ -71,7 +77,13 @@ class Comment(models.Model):
     message = models.TextField()
 
     def __str__(self):
-        return "Comment on a {}".format(str(self.post).lower())
+        return "Comment by {owner} on a {post}".format(post=str(self.post).lower(), owner=self.name)
 
     def get_date(self):
         return self.created.strftime("%B %d, %Y at %H:%M%p")
+
+    def get_absolute_url(self):
+        return "{post_url}#comment-{comment_pk}".format(
+            comment_pk=self.pk,
+            post_url=self.post.get_absolute_url()[:-1],
+        )
