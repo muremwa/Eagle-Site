@@ -1,9 +1,14 @@
 from django.db import models
+from django.utils.text import slugify
 
 # authors of a post
 class Author(models.Model):
     name = models.CharField(max_length=500, help_text="Enter Full name")
     about = models.TextField(help_text="Bio")
+    avatar = models.ImageField(
+        upload_to='blog/authors_avatars/',
+        default='blog/default_images/default_author_avatar.png'
+    )
 
     def __str__(self):
         return "Author called {}".format(self.name)
@@ -27,12 +32,17 @@ class Post(models.Model):
         default="blog/default_images/default_feature.png"
     )
     tags = models.ManyToManyField(Tag)
+    slug = models.SlugField(blank=True, null=True)
 
     def __str__(self):
         return "Blog post titled {}".format(self.title)
 
     def get_date(self):
         return self.created.date().strftime("%B %d, %Y")
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        return super().save()
 
 
 # each entry
@@ -55,10 +65,13 @@ class Entry(models.Model):
 # Comments for each post
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=50, help_text="Enter your full name")
-    email = models.EmailField()
-    website = models.CharField(max_length=400)
+    email = models.EmailField(blank=True, null=True)
     message = models.TextField()
 
     def __str__(self):
         return "Comment on a {}".format(str(self.post).lower())
+
+    def get_date(self):
+        return self.created.strftime("%B %d, %Y at %H:%M%p")
