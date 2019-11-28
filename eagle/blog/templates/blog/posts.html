@@ -11,6 +11,10 @@
     <div class="col-md-7 text-center heading-section ftco-animate">
       <span>Blog</span>
       <h2>Read our blog</h2>
+      <span>All posts
+        {% if author %}by {{ author }}{% endif %} 
+        {% if tag %}tagged {{ tag }}{% endif %}  
+      </span>
     </div>
   </div>
     <div class="row">
@@ -23,9 +27,9 @@
           </a>
           <div class="text p-4 d-block">
             <div class="meta mb-3">
-              <!-- TODO:: add filter for date and author name-->
+              <!-- TODO:: add filter for date -->
               <div><a href="#">{{ post.get_date }}</a></div>
-              <div><a href="#">{{ post.author.name }}</a></div>
+              <div><a href="{% url 'blog:home' %}?author={{ post.author.name }}">{{ post.author.name }}</a></div>
               <div><span class="meta-chat"><span class="icon-chat"></span> {{ post.comment_set.count }}</span></div>
             </div>
             <h3 class="heading"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
@@ -37,7 +41,11 @@
       {% else %}
       <div class="col-md-12 text-center heading-section ftco-animate">
       <span>coming soon</span>
-      <h2>No posts for now</h2>
+      <h2>
+        No posts for now
+        {% if author %}by {{ author }}{% endif %} 
+        {% if tag %}tagged {{ tag }}{% endif %} 
+      </h2>
       </div>
       {% endif %}
       

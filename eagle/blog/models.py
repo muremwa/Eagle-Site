@@ -34,6 +34,7 @@ class Post(models.Model):
     )
     tags = models.ManyToManyField(Tag)
     slug = models.SlugField(blank=True, null=True)
+    objects = models.Manager()
 
     def __str__(self):
         return "Blog post titled {}".format(self.title)

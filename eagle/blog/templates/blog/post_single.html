@@ -28,8 +28,7 @@
             <div class="tagcloud">
               <!-- Tags -->
               {% for tag in post.tags.all %}
-              <!-- TODO:: add a filter for tags -->
-              <a href="#" class="tag-cloud-link">{{ tag.name }}</a>
+              <a href="{% url 'blog:home' %}?tag={{ tag.name }}" class="tag-cloud-link">{{ tag.name }}</a>
               {% endfor %}
             </div>
           
