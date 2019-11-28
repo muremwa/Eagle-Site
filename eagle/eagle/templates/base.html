@@ -36,20 +36,20 @@
       </div>
       <div class="page">
       <nav id="colorlib-main-nav" role="navigation">
-        <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle active"><i></i></a>
+        <a href="{% url 'home' %}" class="js-colorlib-nav-toggle colorlib-nav-toggle active"><i></i></a>
         <div class="js-fullheight colorlib-table">
           <div class="img" style="background-image: url({% static 'images/author-2.jpg' %});"></div>
           <div class="colorlib-table-cell js-fullheight">
             <div class="row no-gutters">
               <div class="col-md-12 text-center">
-                <h1 class="mb-4"><a href="index.html" class="logo">Daniel Muremwa</a></h1>
+                <h1 class="mb-4"><a href="{% url 'home' %}" class="logo">Daniel Muremwa</a></h1>
                 <ul>
-                  <li class="active"><a href="index.html"><span><small>01</small>Home</span></a></li>
-                  <li><a href="about.html"><span><small>02</small>Resume</span></a></li>
-                  <li><a href="services.html"><span><small>03</small>Services</span></a></li>
-                  <li><a href="portfolio.html"><span><small>04</small>Portfolio</span></a></li>
-                  <li><a href="blog.html"><span><small>05</small>Blog</span></a></li>
-                  <li><a href="contact.html"><span><small>06</small>Contact</span></a></li>
+                  <li class="{% block home %}{% endblock home %}"><a href="{% url 'home' %}"><span><small>01</small>Home</span></a></li>
+                  <li class="{% block resume %}{% endblock resume %}"><a href="{% url 'resume' %}"><span><small>02</small>Resume</span></a></li>
+                  <li class="{% block services %}{% endblock services %}"><a href="{% url 'services' %}"><span><small>03</small>Services</span></a></li>
+                  <li class="{% block portfolio %}{% endblock portfolio %}"><a href="{% url 'portfolio' %}"><span><small>04</small>Portfolio</span></a></li>
+                  <li class="{% block blog %}{% endblock blog %}"><a href="{% url 'blog:home' %}"><span><small>05</small>Blog</span></a></li>
+                  <li class="{% block contact %}{% endblock contact %}"><a href="{% url 'contact' %}"><span><small>06</small>Contact</span></a></li>
                 </ul>
               </div>
             </div>
@@ -63,7 +63,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="colorlib-navbar-brand">
-                  <a class="colorlib-logo" href="index.html"><span class="logo-img" style="background-image: url({% static 'images/person_1.jpg' %});"></span>Daniel Muremwa</a>
+                  <a class="colorlib-logo" href="{% url 'home' %}"><span class="logo-img" style="background-image: url({% static 'images/person_1.jpg' %});"></span>Daniel Muremwa</a>
                 </div>
                 <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
               </div>

@@ -2,6 +2,8 @@
 
 {% block title %}Blog - All Posts{% endblock title %}
 
+{% block blog %}active{% endblock blog %}
+
 {% block content %}
 <section class="ftco-section">
   <div class="container mt-5">
@@ -17,15 +19,16 @@
       <!-- Blog entry -->
       <div class="col-md-4 ftco-animate">
         <div class="blog-entry">
-          <a href="blog-single.html" class="block-20" style="background-image: url('{{ post.feature_image.url }}');">
+          <a href="{{ post.get_absolute_url }}" class="block-20" style="background-image: url('{{ post.feature_image.url }}');">
           </a>
           <div class="text p-4 d-block">
             <div class="meta mb-3">
+              <!-- TODO:: add filter for date and author name-->
               <div><a href="#">{{ post.get_date }}</a></div>
               <div><a href="#">{{ post.author.name }}</a></div>
-              <div><a href="#" class="meta-chat"><span class="icon-chat"></span> {{ post.comment_set.count }}</a></div>
+              <div><span class="meta-chat"><span class="icon-chat"></span> {{ post.comment_set.count }}</span></div>
             </div>
-            <h3 class="heading"><a href="#">{{ post.title }}</a></h3>
+            <h3 class="heading"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
           </div>
         </div>
       </div>

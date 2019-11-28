@@ -2,6 +2,8 @@
 
 {% block title %}Check out my resume{% endblock title %}
 
+{% block resume %}active{% endblock resume %}
+
 {% block content %}
 <section class="ftco-section about-section">
     <div class="container">
@@ -14,7 +16,7 @@
             <div class="p-5">
               <h2 class="mb-5">Hi! I'm Daniel Muremwa</h2>
               <p>{{ eagle.bio }}</p>
-              <p><a href="#">Checkout my resume</a></p>
+              <p>Checkout my resume</p>
               <ul class="ftco-footer-social list-unstyled mt-4">
                 <li><a href="{{ eagle.twitter }}"><span class="icon-twitter"></span></a></li>
                 <li><a href="{{ eagle.facebook }}"><span class="icon-facebook"></span></a></li>

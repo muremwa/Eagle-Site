@@ -2,6 +2,8 @@
 
 {% block title %}Contact{% endblock title %}
 
+{% block contact %}active{% endblock contact %}
+
 {% block content %}
 <section class="ftco-section contact-section">
     <div class="container mt-5">
@@ -20,7 +22,7 @@
           <p><span>Email:</span> <a href="mailto:info@yoursite.com">{{ eagle.email }}</a></p>
         </div>
         <div class="col-md-3">
-          <p><span>Website:</span> <a href="#">{{ eagle.website }}</a></p>
+          <p><span>Website:</span> <a href="{{ eagle.website }}">Visit the Website</a></p>
         </div>
       </div>
       <div class="row block-9">
