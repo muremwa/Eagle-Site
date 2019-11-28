@@ -31,6 +31,9 @@ class Post(models.Model):
     def __str__(self):
         return "Blog post titled {}".format(self.title)
 
+    def get_date(self):
+        return self.created.date().strftime("%B %d, %Y")
+
 
 # each entry
 class Entry(models.Model):
