@@ -26,7 +26,7 @@ class Tag(models.Model):
 # Each blog post
 class Post(models.Model):
     title = models.CharField(max_length=100)
-    created = models.DateTimeField(auto_now=True)
+    created = models.DateField(auto_now=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     feature_image = models.ImageField(
         upload_to="blog/feature_images",
@@ -40,7 +40,7 @@ class Post(models.Model):
         return "Blog post titled {}".format(self.title)
 
     def get_date(self):
-        return self.created.date().strftime("%B %d, %Y")
+        return self.created.strftime("%B %d, %Y")
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)

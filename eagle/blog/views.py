@@ -3,6 +3,8 @@ from django.shortcuts import get_object_or_404, redirect
 
 from .models import Post
 
+from datetime import date
+
 
 # blog home
 class AllPostsPage(generic.ListView):
@@ -23,15 +25,21 @@ class AllPostsPage(generic.ListView):
 
         # posts before said date
         if 'before' in self.request.GET:
-            pass
+            date_ = [int(i) for i in self.request.GET['before'].split("-")]
+            date_ = date(date_[0], date_[1], date_[2])
+            q_set = q_set.filter(created__lt=date_)
 
         # posts on the said date
         if 'on' in self.request.GET:
-            pass
+            date_ = [int(i) for i in self.request.GET['on'].split("-")]
+            date_ = date(date_[0], date_[1], date_[2])
+            q_set = q_set.filter(created__iexact=date_)
 
         # posts after said date
         if 'after' in self.request.GET:
-            pass
+            date_ = [int(i) for i in self.request.GET['after'].split("-")]
+            date_ = date(date_[0], date_[1], date_[2])
+            q_set = q_set.filter(created__gt=date_)
 
         return q_set
 

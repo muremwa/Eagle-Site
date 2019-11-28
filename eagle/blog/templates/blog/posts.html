@@ -14,6 +14,9 @@
       <span>All posts
         {% if author %}by {{ author }}{% endif %} 
         {% if tag %}tagged {{ tag }}{% endif %}  
+        {% if on %}dated {{ on }}{% endif %} 
+        {% if before %}posted before {{ before }}{% endif %} 
+        {% if after %}posted after {{ after }}{% endif %} 
       </span>
     </div>
   </div>
@@ -27,8 +30,7 @@
           </a>
           <div class="text p-4 d-block">
             <div class="meta mb-3">
-              <!-- TODO:: add filter for date -->
-              <div><a href="#">{{ post.get_date }}</a></div>
+              <div><a href="{% url 'blog:home' %}?on={{ post.created.isoformat }}">{{ post.get_date }}</a></div>
               <div><a href="{% url 'blog:home' %}?author={{ post.author.name }}">{{ post.author.name }}</a></div>
               <div><span class="meta-chat"><span class="icon-chat"></span> {{ post.comment_set.count }}</span></div>
             </div>
@@ -45,6 +47,9 @@
         No posts for now
         {% if author %}by {{ author }}{% endif %} 
         {% if tag %}tagged {{ tag }}{% endif %} 
+        {% if on %}dated {{ on }}{% endif %} 
+        {% if before %}posted before {{ before }}{% endif %} 
+        {% if after %}posted after {{ after }}{% endif %} 
       </h2>
       </div>
       {% endif %}
