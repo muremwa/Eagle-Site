@@ -45,46 +45,26 @@
               </div>
     
               <div class="exp mt-5 ftco-animate">
-                  <h2 class="mb-4">Experience</h2>
-                  <div class="exp-wrap py-4">
-                      <div class="desc">
-                          <h4>UX &amp; Interaction Designer <span> - Google Company</span> </h4>
-                          <p class="location">Germany - Berlin</p>
-                      </div>
-                      <div class="year">
-                          <p>2017 - Present</p>
-                      </div>
-                  </div>
+                    <h2 class="mb-4">Experience</h2>
+
+                    {% if experiences %}
+                    {% for experience in experiences %}
+                    <div class="exp-wrap py-4">
+                        <div class="desc">
+                            <h4>{{ experience.position }} <span> - {{ experience.company }}</span> </h4>
+                          <p class="location">{{ experience.location }}</p>
+                        </div>
+                        <div class="year">
+                            <p>{{ experience.started.year }} 
+                            - 
+                            {% if experience.ended %}{{ experience.ended.year }}{% else %}Present {% endif %}</p>
+                        </div>
+                    </div>                
+                    {% endfor %}
+                    {% else %}
+                        <span>Experiences to be added</span>
+                    {% endif %}
     
-                  <div class="exp-wrap py-4">
-                      <div class="desc">
-                          <h4>UX &amp; UI Designer <span> - QBootstrap.com</span> </h4>
-                          <p class="location">Germany - Berlin</p>
-                      </div>
-                      <div class="year">
-                          <p>2015 - 2017</p>
-                      </div>
-                  </div>
-    
-                  <div class="exp-wrap py-4">
-                      <div class="desc">
-                          <h4>Designer &amp; Developer <span> - Themeforest.net</span> </h4>
-                          <p class="location">Germany - Berlin</p>
-                      </div>
-                      <div class="year">
-                          <p>2014 - 2015</p>
-                      </div>
-                  </div>
-    
-                  <div class="exp-wrap py-4">
-                      <div class="desc">
-                          <h4>Front-End Developer <span> - Big Comany</span> </h4>
-                          <p class="location">Germany - Berlin</p>
-                      </div>
-                      <div class="year">
-                          <p>2012 - 2014</p>
-                      </div>
-                  </div>
               </div>
     
     

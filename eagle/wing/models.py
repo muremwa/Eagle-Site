@@ -42,3 +42,28 @@ class UserMessage(models.Model):
 
     def __str__(self):
         return "Message from {}".format(self.name)
+
+
+class EagleExperience(models.Model):
+    company = models.CharField(max_length=100, help_text="Where did you work?")
+    position = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
+    started = models.DateField(blank=False, null=False)
+    ended = models.DateField(
+        blank=True,
+        null=True,
+        help_text="If you leave this blank it will indicate that you still work here"
+    )
+    objects = models.Manager()
+
+    def __str__(self):
+        if self.ended:
+            to_date = self.ended
+        else:
+            to_date = "Present"
+
+        return "Experience at {company} from {from_date} to {to_date}".format(
+            company=self.company,
+            from_date=self.started,
+            to_date=to_date,
+        )

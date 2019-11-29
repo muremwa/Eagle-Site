@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import Portfolio, EagleDetails, UserMessage
+from .models import Portfolio, EagleDetails, UserMessage, EagleExperience
 
 admin.site.register(Portfolio)
 admin.site.register(EagleDetails)
 admin.site.register(UserMessage)
+admin.site.register(EagleExperience)
