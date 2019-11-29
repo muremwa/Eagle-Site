@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import View, TemplateView
 
-from .models import EagleDetails, Portfolio, UserMessage, EagleExperience
+from .models import EagleDetails, Portfolio, UserMessage, EagleExperience, EagleEducation
 
 
 # home page
@@ -22,6 +22,7 @@ class ResumePage(TemplateView):
         context = super().get_context_data()
         context['eagle'] = EagleDetails.objects.all()[0]
         context['experiences'] = EagleExperience.objects.all()
+        context['education'] = EagleEducation.objects.all()
         return context
 
 

@@ -44,6 +44,7 @@ class UserMessage(models.Model):
         return "Message from {}".format(self.name)
 
 
+# experiences in work
 class EagleExperience(models.Model):
     company = models.CharField(max_length=100, help_text="Where did you work?")
     position = models.CharField(max_length=100)
@@ -52,9 +53,12 @@ class EagleExperience(models.Model):
     ended = models.DateField(
         blank=True,
         null=True,
-        help_text="If you leave this blank it will indicate that you still work here"
+        help_text="If you leave this blank it will indicate that you still work here",
     )
     objects = models.Manager()
+
+    class Meta:
+        ordering = ('-started',)
 
     def __str__(self):
         if self.ended:
@@ -64,6 +68,37 @@ class EagleExperience(models.Model):
 
         return "Experience at {company} from {from_date} to {to_date}".format(
             company=self.company,
+            from_date=self.started,
+            to_date=to_date,
+        )
+
+
+# Education experience
+class EagleEducation(models.Model):
+    school = models.CharField(max_length=50, help_text="What institution were you in?")
+    qualification = models.CharField(max_length=50, help_text="What did you achieve?")
+    location = models.CharField(max_length=100)
+    started = models.DateField(blank=False, null=False)
+    ended = models.DateField(
+        blank=True,
+        null=True,
+        help_text="If you leave this blank it will indicate that you are a continuing student",
+    )
+    objects = models.Manager()
+
+    class Meta:
+        verbose_name = "Eagle education experience"
+        verbose_name_plural = "Eagle education experiences"
+        ordering = ('-started',)
+
+    def __str__(self):
+        if self.ended:
+            to_date = self.ended
+        else:
+            to_date = "Present"
+
+        return "Education at {school} from {from_date} to {to_date}".format(
+            school=self.school,
             from_date=self.started,
             to_date=to_date,
         )

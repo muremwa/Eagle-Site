@@ -70,45 +70,23 @@
     
               <div class="exp mt-5 ftco-animate">
                   <h2 class="mb-4">Education</h2>
+                  {% if education %}
+                  {% for education_ex in education %}
                   <div class="exp-wrap py-4">
                       <div class="desc">
-                          <h4>Master Degree in Computer Science<span> - Harvard University</span> </h4>
-                          <p class="location">Germany - Berlin</p>
+                          <h4>{{ education_ex.qualification }}<span> - {{ education_ex.school }}</span> </h4>
+                          <p class="location">{{ education_ex.location }}</p>
                       </div>
                       <div class="year">
-                          <p>2013 - 2014</p>
+                          <p>{{ education_ex.started.year }} 
+                            - 
+                            {% if education_ex.ended %}{{ education_ex.ended.year }}{% else %}Present {% endif %}</p>
                       </div>
                   </div>
-    
-                  <div class="exp-wrap py-4">
-                      <div class="desc">
-                          <h4>Bacheclor of Science in Computer Science<span> - Harvard University</span> </h4>
-                          <p class="location">Germany - Berlin</p>
-                      </div>
-                      <div class="year">
-                          <p>2009 - 2012</p>
-                      </div>
-                  </div>
-    
-                  <div class="exp-wrap py-4">
-                      <div class="desc">
-                          <h4>Diploma in Information Technology<span> - Oxford University</span> </h4>
-                          <p class="location">Germany - Berlin</p>
-                      </div>
-                      <div class="year">
-                          <p>2008 - 2010</p>
-                      </div>
-                  </div>
-    
-                  <div class="exp-wrap py-4">
-                      <div class="desc">
-                          <h4>Front-End Developer <span> - Big Comany</span> </h4>
-                          <p class="location">Germany - Berlin</p>
-                      </div>
-                      <div class="year">
-                          <p>2012 - 2014</p>
-                      </div>
-                  </div>
+                  {% endfor %}
+                  {% else %}
+                        <span>Education to be added</span>
+                  {% endif %}
               </div>
           </div>
       </div>
