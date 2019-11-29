@@ -1,5 +1,6 @@
 from django.views import generic
 from django.shortcuts import get_object_or_404, redirect
+from django.http import Http404
 
 from .models import Post
 
@@ -13,7 +14,7 @@ class AllPostsPage(generic.ListView):
     model = Post
 
     def get_queryset(self):
-        q_set = Post.objects.all()
+        q_set = Post.objects.filter(published__exact=True)
 
         # filter by author's name
         if 'author' in self.request.GET:
@@ -56,6 +57,13 @@ class PostPage(generic.DetailView):
     context_object_name = 'post'
     template_name = 'blog/post_single.html'
     slug_url_kwarg = 'slug'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        if not context['post'].published:
+            raise Http404
+
+        return context
 
     def post(self, *args, **kwargs):
         post = get_object_or_404(Post, slug=kwargs['slug'])

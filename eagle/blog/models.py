@@ -34,6 +34,7 @@ class Post(models.Model):
     )
     tags = models.ManyToManyField(Tag)
     slug = models.SlugField(blank=True, null=True)
+    published = models.BooleanField(default=False, help_text="IF NOT PUBLISHED IT WILL NOT APPEAR ANYWHERE")
     objects = models.Manager()
 
     class Meta:
