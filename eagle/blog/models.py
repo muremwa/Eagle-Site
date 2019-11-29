@@ -2,6 +2,9 @@ from django.db import models
 from django.utils.text import slugify
 from django.shortcuts import reverse
 
+import datetime
+
+
 # authors of a post
 class Author(models.Model):
     name = models.CharField(max_length=500, help_text="Enter Full name")
@@ -88,7 +91,8 @@ class Comment(models.Model):
         return "Comment by {owner} on a {post}".format(post=str(self.post).lower(), owner=self.name)
 
     def get_date(self):
-        return self.created.strftime("%B %d, %Y at %H:%M%p")
+        clean_date = self.created + datetime.timedelta(0.125)
+        return clean_date.strftime("%B %d, %Y at %H:%M%p")
 
     def get_absolute_url(self):
         return "{post_url}#comment-{comment_pk}".format(
