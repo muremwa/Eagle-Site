@@ -36,6 +36,9 @@ class Post(models.Model):
     slug = models.SlugField(blank=True, null=True)
     objects = models.Manager()
 
+    class Meta:
+        ordering = ('-id',)
+
     def __str__(self):
         return "Blog post titled {}".format(self.title)
 
@@ -76,6 +79,9 @@ class Comment(models.Model):
     name = models.CharField(max_length=50, help_text="Enter your full name")
     email = models.EmailField(blank=True, null=True)
     message = models.TextField()
+
+    class Meta:
+        ordering = ('-id',)
 
     def __str__(self):
         return "Comment by {owner} on a {post}".format(post=str(self.post).lower(), owner=self.name)
