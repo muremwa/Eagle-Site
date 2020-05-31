@@ -46,9 +46,8 @@ class AllPostsPage(generic.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
-        extras = dict(self.request.GET)
-        super_lists = [[key, item] for key, item in context.items()] + [[key, item[0]] for key, item in extras.items()]
-        return dict(super_lists)
+        context.update(dict(self.request.GET.items()))
+        return context
 
 
 # individual post

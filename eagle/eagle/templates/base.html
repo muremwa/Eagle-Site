@@ -35,7 +35,7 @@
         </div>
       </div>
       <div class="page">
-      <nav id="colorlib-main-nav" role="navigation">
+      <nav id="colorlib-main-nav" role="navigation" style="overflow-y: scroll;">
         <a href="{% url 'home' %}" class="js-colorlib-nav-toggle colorlib-nav-toggle active"><i></i></a>
         <div class="js-fullheight colorlib-table">
           <div class="img" style="background-image: url({% static 'images/author-2.jpg' %});"></div>
@@ -50,6 +50,8 @@
                   <li class="{% block portfolio %}{% endblock portfolio %}"><a href="{% url 'portfolio' %}"><span><small>04</small>Portfolio</span></a></li>
                   <li class="{% block blog %}{% endblock blog %}"><a href="{% url 'blog:home' %}"><span><small>05</small>Blog</span></a></li>
                   <li class="{% block contact %}{% endblock contact %}"><a href="{% url 'contact' %}"><span><small>06</small>Contact</span></a></li>
+                  <li><a href="{{ eagle.github }}" target="_blank"><span><small>07</small>Github</span></a></lilass=>
+                  <li><a href="{{ eagle.linkedin }}" target="_blank"><span><small>08</small>Linked in</span></a></li>
                 </ul>
               </div>
             </div>
@@ -81,8 +83,8 @@
     	            <div class="col-md-5 text-center">
     	                <div class="ftco-footer-widget mb-5">
     	                    <ul class="ftco-footer-social list-unstyled">
-    	                        <li class=""><a style="background: #121212;" href=""><img src="{% static 'svg/github.svg' %}"></a></li>
-    	                        <li class=""><a style="background: #121212;" href=""><img src="{% static 'svg/linkedin.svg' %}"></a></li>       
+    	                        <li class=""><a style="background: #121212;" href="{{ eagle.github }}"><img src="{% static 'svg/github.svg' %}"></a></li>
+    	                        <li class=""><a style="background: #121212;" href="{{ eagle.linkedin }}"><img src="{% static 'svg/linkedin.svg' %}"></a></li>       
     	                    </ul>
     	                </div>
     	                <div class="ftco-footer-widget">
@@ -124,8 +126,6 @@
     <script src="{% static 'js/scrollax.min.js' %}"></script>
     <script src="{% static 'js/bootstrap-datepicker.js"' %}></script>
     <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-    <script src="{% static 'js/google-map.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
     
   </body>

@@ -12,6 +12,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 with open('eagle/secret_key.txt', 'r') as f:
     SECRET_KEY = f.read().strip()
 
+with open('eagle/secret_eagle_name.txt', 'r') as f:
+    SECRET_EAGLE_NAME = f.read().strip()
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', False))
 
@@ -54,6 +57,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'eagle.eagle_profile.eagle_profile'
             ],
         },
     },
@@ -93,7 +97,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Comment out during production
 # STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'eagle/static'),
+#    os.path.join(BASE_DIR, 'eagle/static'),
 # )
 
 

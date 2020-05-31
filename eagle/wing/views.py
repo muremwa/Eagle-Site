@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import View, TemplateView
 
-from .models import EagleDetails, Portfolio, UserMessage, EagleExperience, EagleEducation
+from .models import EagleProfile, Portfolio, UserMessage, EagleExperience, EagleEducation
 
 
 # home page
@@ -10,7 +10,6 @@ class HomePage(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        context['eagle'] = EagleDetails.objects.all()[0]
         context['portfolios'] = Portfolio.objects.all()[:4]
         return context
 
@@ -20,7 +19,6 @@ class ResumePage(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        context['eagle'] = EagleDetails.objects.all()[0]
         context['experiences'] = EagleExperience.objects.all()
         context['education'] = EagleEducation.objects.all()
         return context
@@ -39,9 +37,7 @@ class ContactPage(View):
     template_name = 'wing/contact.html'
 
     def get(self, *args, **kwargs):
-        return render(self.request, self.template_name, {
-            'eagle': EagleDetails.objects.all()[0],
-        })
+        return render(self.request, self.template_name)
 
     def post(self, *args, **kwargs):
         message = UserMessage(
@@ -54,7 +50,6 @@ class ContactPage(View):
 
         return render(self.request, self.template_name, {
             'message_sent': True,
-            'eagle': EagleDetails.objects.all()[0],
             'name': message.name,
         })
 

@@ -1,23 +1,32 @@
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.contrib.auth.models import User
 
 
-class EagleDetails(models.Model):
+class EagleProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField()
     portrait = models.ImageField(upload_to='eagle_details/')
-    address = models.CharField(max_length=500)
-    phone = models.CharField(max_length=10)
-    facebook = models.URLField(blank=True, null=True)
-    twitter = models.URLField(blank=True, null=True)
+    github = models.URLField(blank=True, null=True)
+    linkedin = models.URLField(blank=True, null=True)
     email = models.EmailField()
-    website = models.URLField()
     objects = models.Manager()
 
     class Meta:
-        verbose_name = 'Super Details'
-        verbose_name_plural = 'Eagle Details'
+        verbose_name = 'Super Profile'
+        verbose_name_plural = 'Eagle Profile'
+
+
+    @staticmethod
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            if instance.is_superuser:
+                EagleProfile.objects.create(user=instance)
 
     def __str__(self):
-        return "EAGLE DETAILS"
+        return f"EAGLE PROFILE FOR {str(self.user.username).upper()}"
 
 
 class Portfolio(models.Model):
