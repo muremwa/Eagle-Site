@@ -9,7 +9,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%67!-s15@+pg86l8j0qde2*#z3d=bt+ipf&b$+0)0)rgm(^@a!'
+with open('eagle/secret_key.txt', 'r') as f:
+    SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -45,7 +46,7 @@ ROOT_URLCONF = 'eagle.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['eagle/templates', 'templates',],
+        'DIRS': ['eagle/templates', 'templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

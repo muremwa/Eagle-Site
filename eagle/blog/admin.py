@@ -10,16 +10,16 @@ class EntryInline(admin.StackedInline):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ['title', 'author', 'published']
-    actions = ['publish', 'un_publish',]
-    inlines = [EntryInline,]
+    actions = ['publish', 'un_publish', ]
+    inlines = [EntryInline, ]
     exclude = ('published',)
 
     @staticmethod
-    def pluralize(set):
-        if set == 1:
+    def pluralize(set_):
+        if set_ == 1:
             return "1 post "
         else:
-            return "{set_count} posts ".format(set_count=set)
+            return "{set_count} posts ".format(set_count=set_)
 
     def publish(self, request, queryset):
         updated = queryset.update(published=True)
