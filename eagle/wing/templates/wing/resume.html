@@ -17,14 +17,10 @@
               <h2 class="mb-5">Hi! I'm Daniel Muremwa</h2>
               <p>{{ eagle.bio }}</p>
               <p>Checkout my resume</p>
-              <ul class="ftco-footer-social list-unstyled mt-4">
-                <li><a href="{{ eagle.twitter }}"><span class="icon-twitter"></span></a></li>
-                <li><a href="{{ eagle.facebook }}"><span class="icon-facebook"></span></a></li>
-                <li><a href="{{ eagle.instagram }}"><span class="icon-instagram"></span></a></li>
-              </ul>
               <h5>Contact me here!</h5>
-              <p>Email: <a href="#">{{ eagle.email }}</a></p>
-              <p>Phone: <a href="#">{{ eagle.phone }}</a></p>
+              <p>Email: <a href="mailto:{{ eagle.email }}">{{ eagle.email }}</a></p>
+              <p>Linked In: <a href="" target="_blank">visit</a></p>
+              <p>Github: <a href="" target="_blank">visit</a></p>
             </div>
           </div>
         </div>
@@ -38,8 +34,6 @@
                   <div class="row my-5">
                       <div class="col-md-6">
                           <p><strong>Name:</strong> <span>Daniel Muremwa</span></p>
-                          <p><strong>Address:</strong> <span>{{ eagle.address }}</span></p>
-                          <p><strong>Phone:</strong> <span>{{ eagle.phone }}</span></p>
                       </div>
                   </div>
               </div>
@@ -87,6 +81,28 @@
                   {% else %}
                         <span>Education to be added</span>
                   {% endif %}
+              </div>
+
+              <div class="exp mt-5 ftco-animate">
+                <div class="col-md-8">
+                  <h2 class="mb-4">My Skills</h2>
+                </div>
+
+                <div class="col-md-6 animate-box">
+                    <div class="progress-wrap">
+                        <h4>HTML</h4>
+                        <h4>CSS</h4>
+                        <h4>JavaScript (ES6, React, jQuery)</h4>
+                        <h4>Python (Django, plus other libraries)</h4>
+                        <h4>Version control using Git (and <a href="https://github.com/muremwa" target="_blank">Github</a>)</h4>
+                        <br />
+                        <h3>Learning</h3>
+                        <h4>Machine learning</h4>
+                        <h4>Java</h4>
+                        <h4>C and C++</h4>
+                    </div>
+                </div>
+
               </div>
           </div>
       </div>

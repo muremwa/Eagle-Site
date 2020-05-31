@@ -9,53 +9,56 @@
     <div class="container mt-5">
       <div class="row d-flex mb-5 contact-info">
         <div class="col-md-12 mb-4">
-          <h2 class="h4">Contact Information</h2>
+            <h2 class="h4">Contact Information</h2>
         </div>
+
         <div class="w-100"></div>
-        <div class="col-md-3">
-          <p><span>Address:</span> {{ eagle.address }}</p>
+            <div class="col-md-3">
+                <p><span>Github:</span> <a href="" target="_blank">visit</a></p>
+            </div>
+
+            <div class="col-md-3">
+                <p><span>Linked in:</span> <a href="" target="_blank">visit</a></p>
+            </div>
+
+            <div class="col-md-3">
+                <p><span>Email:</span> <a href="mailto:{{ eagle.email }}">{{ eagle.email }}</a></p>
+            </div>
         </div>
-        <div class="col-md-3">
-          <p><span>Phone:</span> <a href="tel://1234567920">{{ eagle.phone }}</a></p>
-        </div>
-        <div class="col-md-3">
-          <p><span>Email:</span> <a href="mailto:info@yoursite.com">{{ eagle.email }}</a></p>
-        </div>
-        <div class="col-md-3">
-          <p><span>Website:</span> <a href="{{ eagle.website }}">Visit the Website</a></p>
-        </div>
-      </div>
-      <div class="row block-9">
+
+        <div class="row block-9">
         {% if message_sent %}
-          <div class="col-md-12 text-center heading-section ftco-animate">
-              <h2>{{ name }}, your message has been sent</h2>
-          </div>
+            <div class="col-md-12 text-center heading-section ftco-animate">
+                <h2>{{ name }}, your message has been sent</h2>
+            </div>
         
         {% else %}
-          <div class="col-md-6 pr-md-5">
-          <form action="" method="POST">
-            {% csrf_token %}
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Your Name" name='name'>
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Your Email" name='email'>
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Subject" name='subject'>
-            </div>
-            <div class="form-group">
-              <textarea name="message" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
-            </div>
-            <div class="form-group">
-              <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
-            </div>
-          </form>
+            <div class="col-md-6 pr-md-5">
+                <form action="" method="POST">
+                {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Your Name" name='name'>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Your Email" name='email'>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Subject" name='subject'>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+                    </div>
+                </form>
         
-          </div>
+            </div>
         {% endif %}
-        <div class="col-md-6" id="map"></div>
-      </div>
+        </div>
     </div>
 </section>
 {% endblock content %}
