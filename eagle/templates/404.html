@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}404 page not found{% endblock title %}
+
+{% block content %}
+
+<div id="404-page" class="text-center ftco-section">
+    <img style="height: 40vh;" src="{% static 'svg/404.svg' %}" alt="404 graphic" />
+    <h2>The page you requested does not exist</h2>
+</div>
+
+{% endblock content %}

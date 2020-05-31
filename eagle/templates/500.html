@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}500 server error{% endblock title %}
+
+{% block content %}
+
+<div id="500-page" class="text-center ftco-section">
+    <img style="height: 40vh;" src="{% static 'svg/500.svg' %}" alt="500 graphic" />
+    <h3>A critical error occured while handing your request. Try again in a few minutes.</h3>
+</div>
+
+{% endblock content %}

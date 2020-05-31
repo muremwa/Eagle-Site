@@ -13,9 +13,9 @@ with open('eagle/secret_key.txt', 'r') as f:
     SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', False))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -91,10 +91,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'eagle/static'),
-)
+# Comment out during production
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'eagle/static'),
+# )
 
 
 # Internationalization
@@ -117,3 +117,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# comment out when debug == True
+STATIC_ROOT = os.path.join(BASE_DIR, 'eagle/static')
