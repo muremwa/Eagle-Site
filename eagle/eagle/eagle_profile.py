@@ -5,5 +5,4 @@ from .settings import SECRET_EAGLE_NAME
 
 
 def eagle_profile(request):
-    if request.method == "GET":
-        return {'eagle': get_object_or_404(User, username=SECRET_EAGLE_NAME).eagleprofile}
+    return {'eagle': get_object_or_404(User, username=SECRET_EAGLE_NAME).eagleprofile}
