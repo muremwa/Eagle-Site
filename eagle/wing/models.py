@@ -17,7 +17,6 @@ class EagleProfile(models.Model):
         verbose_name = 'Super Profile'
         verbose_name_plural = 'Eagle Profile'
 
-
     @staticmethod
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):

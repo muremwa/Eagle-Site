@@ -4,3 +4,4 @@ eagle/media/
 *pdf
 eagle/db.sqlite3
 secret*
+es/*

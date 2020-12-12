@@ -9,6 +9,7 @@ import datetime
 class Author(models.Model):
     name = models.CharField(max_length=500, help_text="Enter Full name")
     about = models.TextField(help_text="Bio")
+    objects = models.Manager()
     avatar = models.ImageField(
         upload_to='blog/authors_avatars/',
         default='blog/default_images/default_author_avatar.png'
@@ -21,6 +22,7 @@ class Author(models.Model):
 # tag the post
 class Tag(models.Model):
     name = models.CharField(max_length=100)
+    objects = models.Manager()
 
     def __str__(self):
         return "Tag for {}".format(self.name)
@@ -65,6 +67,10 @@ class Entry(models.Model):
     heading = models.CharField(max_length=50, help_text="This is not a must", blank=True, null=True)
     content = models.TextField(help_text="Entry here")
     image = models.ImageField(upload_to="blog/entry_images", blank=True, null=True)
+    objects = models.Manager()
+
+    class Meta:
+        verbose_name_plural = 'entries'
 
     def __str__(self):
         if self.heading:
@@ -83,6 +89,7 @@ class Comment(models.Model):
     name = models.CharField(max_length=50, help_text="Enter your full name")
     email = models.EmailField(blank=True, null=True)
     message = models.TextField()
+    objects = models.Manager()
 
     class Meta:
         ordering = ('-id',)

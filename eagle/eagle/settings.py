@@ -16,7 +16,7 @@ with open('eagle/secret_eagle_name.txt', 'r') as f:
     SECRET_EAGLE_NAME = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', False))
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 ALLOWED_HOSTS = ["*"]
 
@@ -96,9 +96,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Comment out during production
-# STATICFILES_DIRS = (
-#    os.path.join(BASE_DIR, 'eagle/static'),
-# )
+STATICFILES_DIRS = (
+   os.path.join(BASE_DIR, 'eagle/static'),
+)
 
 
 # Internationalization
@@ -123,4 +123,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # comment out when debug == True
-STATIC_ROOT = os.path.join(BASE_DIR, 'eagle/static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'eagle/static')
