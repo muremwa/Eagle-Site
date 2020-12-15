@@ -1,4 +1,4 @@
-<div class="block-3 d-md-flex {% if forloop.counter|divisibleby:2 %}order-1-1{% endif %} ftco-animate" data-scrollax-parent="true" style="width: 100%">
+<div class="port-card block-3 d-md-flex {% if forloop.counter|divisibleby:2 %}order-1-1{% endif %} ftco-animate" data-scrollax-parent="true" style="width: 100%">
     <a href="{% url 'portfolio' %}" class="image d-flex justify-content-center align-items-center" style="background-image: url({{ portfolio.image.url }}); max-height: 90%; margin: 2em 0 2em 0;" data-scrollax=" properties: { translateY: '-30%'}">
         <div class="icon d-flex text-center justify-content-center align-items-center">
             <span class="icon-search"></span>
@@ -8,6 +8,24 @@
         <h4 class="subheading">{{ portfolio.portfolio_type }}</h4>
         <h2 class="heading">{{ portfolio.title }}</h2>
         <p>{{ portfolio.description }}</p>
+        {% if portfolio.github_link or portfolio.download_stats %}
+            <div class='stats'>
+                <div class="stats-bar">
+                    {% if portfolio.github_link %}
+                        <span title="Github pull requests"><span class="ion-ios-git-pull-request"></span> <span id="pulls-{{ portfolio.pk }}">-</span></span> •
+                        <span title="Github commits"><span class="ion-ios-git-commit"></span> <span id="commits-{{ portfolio.pk }}">-</span></span> •
+                        <span title="Github issues"><span class="icon-error"></span> <span id="issues-{{ portfolio.pk }}">-</span></span> •
+                        <span title="Github forks"><span class="icon-code-fork"></span> <span id="forks-{{ portfolio.pk }}">-</span></span> •
+                        <span title="Github stars"><span class="icon-star"></span> <span id="stars-{{ portfolio.pk }}">-</span></span>
+                    {% endif %}
+                    {% if portfolio.github_link and portfolio.download_stats %}•{% endif %}
+                    {% if portfolio.download_stats %}
+                        <span title="Downloads"><span class="icon-download"></span> <span id="down-{{ portfolio.pk }}">-</span>
+                    {% endif %}
+                </div>
+                <button id="{{ portfolio.pk }}-refresh" title="Refresh statistics" class="refresh-stats btn btn-primary" onclick="loadStatistics('{{ portfolio.pk }}', '{{ portfolio.github_link}}', '{{ portfolio.download_stats }}')"><span class="icon-refresh2"></span></button>
+            </div>
+        {% endif %}
         <p><a href="{{ portfolio.link }}">View Project</a></p>
     </div>
 </div>

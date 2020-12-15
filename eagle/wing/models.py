@@ -34,6 +34,8 @@ class Portfolio(models.Model):
     image = models.ImageField(upload_to='portfolio/portfolio_images/')
     description = models.TextField()
     link = models.URLField()
+    github_link = models.URLField(blank=True, null=True)
+    download_stats = models.URLField(blank=True, null=True)
     objects = models.Manager()
 
     def __str__(self):

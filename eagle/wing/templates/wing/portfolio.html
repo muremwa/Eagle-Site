@@ -15,9 +15,7 @@
       </div>
       <div class="row no-gutters">
           {% if portfolios %}
-            {% for portfolio in portfolios %}
-              {% include 'wing/reuse/_portfolio_card.html' %}
-            {% endfor %}
+            {% include 'wing/reuse/_portfolio_super.html' %}
           {% else %}
             <div class="col-md-12 text-center heading-section ftco-animate">
               <h2>Sorry. Portfolio works coming soon.</h2>

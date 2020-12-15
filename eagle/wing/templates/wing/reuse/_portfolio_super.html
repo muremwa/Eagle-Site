@@ -1,0 +1,27 @@
+{% load static %}
+
+<style>
+    .port-card .stats-bar {
+        border-style: solid;
+        border-top-color: #747474;
+        border-bottom-color: #747474;
+    }
+
+    .port-card .stats-bar > span {
+        margin: 0 1em 0 1em;
+    }
+
+    .refresh-stats {
+        margin-top: 10px;
+    }
+</style>
+
+{% for portfolio in portfolios %}
+    {% include 'wing/reuse/_portfolio_card.html' %}
+{% endfor %}
+
+
+{% block script %}
+<script src="{% static 'js/ajaxWrapper.js' %}"></script>
+<script src="{% static 'js/_port.js' %}"></script>
+{% endblock script %}

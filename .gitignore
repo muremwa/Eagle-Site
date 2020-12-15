@@ -5,3 +5,4 @@ eagle/media/
 eagle/db.sqlite3
 secret*
 es/*
+eagle/*/migrations/*
