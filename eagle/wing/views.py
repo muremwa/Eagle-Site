@@ -42,8 +42,8 @@ class ContactPage(View):
     def post(self, *args, **kwargs):
         message = UserMessage(
             name=self.request.POST['name'],
-            email= self.request.POST['email'],
-            subject= self.request.POST['subject'],
+            email=self.request.POST['email'],
+            subject=self.request.POST['subject'],
             message=self.request.POST['message'],
         )
         message.save()
