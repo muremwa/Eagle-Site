@@ -25,6 +25,9 @@ urlpatterns = [
     # contact/
     path('contact/', wing_views.ContactPage.as_view(), name='contact'),
 
+    # extension stats data
+    path('tools/extension/<str:extension_id>/', wing_views.extension_data, name='extension_stats'),
+
     # blog/
     path('blog/', include('blog.urls')),
 

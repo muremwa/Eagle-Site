@@ -1,7 +1,12 @@
+from urllib.error import URLError
+
 from django.shortcuts import render
+from django.http import JsonResponse
 from django.views.generic import View, TemplateView
 
-from .models import EagleProfile, Portfolio, UserMessage, EagleExperience, EagleEducation
+from vscrap import get_extension_details
+
+from .models import Portfolio, UserMessage, EagleExperience, EagleEducation
 
 
 # home page
@@ -56,3 +61,24 @@ class ContactPage(View):
 
 class ServicesPage(TemplateView):
     template_name = 'wing/services.html'
+
+
+# scrap marketplace
+def extension_data(request, extension_id):
+    if request.method == 'GET':
+        try:
+            details = get_extension_details(extension_id)
+        except URLError:
+            details = {}
+
+        return JsonResponse({
+            'downloads': details.get('installs', 0)
+        })
+
+    elif request.method == 'OPTIONS':
+        return JsonResponse({
+            'methods': 'GET',
+            'return': {
+                'downloads': 'integer'
+            }
+        })
