@@ -5177,6 +5177,10 @@ button.bg-dark:focus {
     display: -ms-inline-flexbox !important;
     display: inline-flex !important; } }
 
+.order-1-1 {
+  flex-direction: row-reverse;
+}
+
 @media (min-width: 992px) {
   .d-lg-none {
     display: none !important; }
