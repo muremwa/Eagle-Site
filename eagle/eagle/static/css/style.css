@@ -8090,7 +8090,9 @@ textarea.form-control {
     color: #ebebeb; }
 
 .about-author img {
-  border-radius: 50%; }
+  border-radius: 4%; 
+  max-width: 60%;
+}
 
 .ftco-section {
   padding: 7em 0; }
