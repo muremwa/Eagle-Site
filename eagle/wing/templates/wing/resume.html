@@ -49,9 +49,13 @@
                           <p class="location">{{ experience.location }}</p>
                         </div>
                         <div class="year">
-                            <p>{{ experience.started.year }} 
+                            <p>{{ experience.started|date:"F, Y" }}
                             - 
-                            {% if experience.ended %}{{ experience.ended.year }}{% else %}Present {% endif %}</p>
+                            {% if experience.ended %}
+                              {{ experience.ended|date:"F, Y" }} 
+                            {% else %}
+                            Present 
+                            {% endif %}</p>
                         </div>
                     </div>                
                     {% endfor %}
