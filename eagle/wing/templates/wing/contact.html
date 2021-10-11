@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load wing_filter %}
 
 {% block title %}Contact{% endblock title %}
 
@@ -13,15 +14,15 @@
         </div>
 
         <div class="w-100"></div>
-            <div class="col-md-3">
-                <p><span>Github:</span> <a href="{{ eagle.github }}" target="_blank">visit</a></p>
+            <div class="col-md-4">
+                <p><span>Github:</span> <a href="{{ eagle.github }}" target="_blank" rel="noopener noreferrer">{{ eagle.github|url_to_string }}</a></p>
             </div>
 
-            <div class="col-md-3">
-                <p><span>Linked in:</span> <a href="{{ eagle.linkedin }}" target="_blank">visit</a></p>
+            <div class="col-md-4">
+                <p><span>Linked in:</span> <a href="{{ eagle.linkedin }}" target="_blank" rel="noopener noreferrer">{{ eagle.linkedin|url_to_string }}</a></p>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <p><span>Email:</span> <a href="mailto:{{ eagle.email }}">{{ eagle.email }}</a></p>
             </div>
         </div>

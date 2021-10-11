@@ -29,32 +29,26 @@
           <div class="col-md-10">
               <div class="profile ftco-animate">
                   <h2 class="mb-4">Profile</h2>
-                  <h4 class="mb-4">I'm a Backend &amp; Frontend Developer from Limuru, Kenya. I aim to make a difference through smart solutions.</h4>
-                  <p>And he'll call and want help and he may only have one shot to interview the subject and so we try our best to give him some idea of strategies and tactics to get the person to confess or at least make admissions based on the behavior </p>
-                  <div class="row my-5">
-                      <div class="col-md-6">
-                          <p><strong>Name:</strong> <span>Daniel Muremwa</span></p>
-                      </div>
-                  </div>
+                  <p class="mb-4">I'm a Backend &amp; Frontend Developer from Limuru, Kenya. I aim to make a difference through smart solutions.</p>
               </div>
     
               <div class="exp mt-5 ftco-animate">
                     <h2 class="mb-4">Experience</h2>
 
                     {% if experiences %}
-                    {% for experience in experiences %}
-                    <div class="exp-wrap py-4">
-                        <div class="desc">
-                            <h4>{{ experience.position }} <span> - {{ experience.company }}</span> </h4>
-                          <p class="location">{{ experience.location }}</p>
-                        </div>
-                        <div class="year">
-                            <p>{{ experience.started.year }} 
-                            - 
-                            {% if experience.ended %}{{ experience.ended.year }}{% else %}Present {% endif %}</p>
-                        </div>
-                    </div>                
-                    {% endfor %}
+						{% for experience in experiences %}
+						<div class="exp-wrap py-4">
+							<div class="desc">
+								<h4>{{ experience.position }} <span> - {{ experience.company }}</span> </h4>
+							<p class="location">{{ experience.location }}</p>
+							</div>
+							<div class="year">
+								<p>{{ experience.started.year }} 
+								- 
+								{% if experience.ended %}{{ experience.ended.year }}{% else %}Present {% endif %}</p>
+							</div>
+						</div>                
+						{% endfor %}
                     {% else %}
                         <span>Experiences to be added</span>
                     {% endif %}
@@ -95,11 +89,7 @@
                         <h4>JavaScript (ES6, React, jQuery)</h4>
                         <h4>Python (Django, plus other libraries)</h4>
                         <h4>Version control using Git (and <a href="https://github.com/muremwa" target="_blank">Github</a>)</h4>
-                        <br />
-                        <h3>Learning</h3>
-                        <h4>Machine learning</h4>
-                        <h4>Java</h4>
-                        <h4>C and C++</h4>
+                        
                     </div>
                 </div>
 
