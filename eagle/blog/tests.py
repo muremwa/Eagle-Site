@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.utils.text import slugify
 from django.urls import reverse
 
-from .models import Author, Tag, Comment, Entry, Post
+from .models import Author, Tag, Comment, Post
 
 
 class BlogModelsTestCase(TestCase):
@@ -21,11 +21,6 @@ class BlogModelsTestCase(TestCase):
             author=self.author,
         )
         self.post.tags.add(self.tag)
-        self.entry = Entry.objects.create(
-            post=self.post,
-            heading='',
-            content='sample content',
-        )
         self.comment = Comment.objects.create(
             post=self.post,
             name='Eric',
@@ -45,6 +40,7 @@ class BlogModelsTestCase(TestCase):
         self.assertEqual(str(tag_), 'Tag for squid')
 
     def test_post(self):
+        self.post.save()
         self.assertEqual(self.post.created, datetime.date(datetime.today()))
         self.assertEqual(self.post.author, self.author)
         self.assertEqual(self.post.feature_image, 'blog/default_images/default_feature.png')
@@ -52,19 +48,11 @@ class BlogModelsTestCase(TestCase):
             list(self.post.tags.all()),
             [self.tag]
         )
-        self.assertEqual(self.post.slug, slugify('Sample Blog'))
+        self.assertEqual(self.post.slug, slugify(f'{"Sample Blog"}-{self.post.author.name}-{self.post.pk}'))
         self.assertEqual(self.post.published, False)
-
-    def test_entry(self):
-        self.assertEqual(self.entry.post, self.post)
-        self.assertListEqual(
-            list(self.post.entry_set.all()),
-            [self.entry]
-        )
 
     def test_comment(self):
         self.assertEqual(self.comment.post, self.post)
-        print(self.comment.get_absolute_url())
         self.assertEqual(
             self.comment.get_absolute_url(),
             '{url}#comment-{comment_pk}'.format(
@@ -72,27 +60,3 @@ class BlogModelsTestCase(TestCase):
                 comment_pk=self.comment.pk
             )
         )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

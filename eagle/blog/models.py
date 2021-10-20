@@ -1,8 +1,8 @@
+import datetime
+
 from django.db import models
 from django.utils.text import slugify
 from django.shortcuts import reverse
-
-import datetime
 
 
 # authors of a post
@@ -40,6 +40,7 @@ class Post(models.Model):
     tags = models.ManyToManyField(Tag)
     slug = models.SlugField(blank=True, null=True)
     published = models.BooleanField(default=False, help_text="IF NOT PUBLISHED IT WILL NOT APPEAR ANYWHERE")
+    content = models.TextField(help_text='Enter Content Here')
     objects = models.Manager()
 
     class Meta:
@@ -52,34 +53,13 @@ class Post(models.Model):
         return self.created.strftime("%B %d, %Y")
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = slugify(f'{self.title}-{self.author.name}-{self.pk}')
         return super().save()
 
     def get_absolute_url(self):
         return reverse('blog:post', kwargs={
             'slug': self.slug,
         })
-
-
-# each entry
-class Entry(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    heading = models.CharField(max_length=50, help_text="This is not a must", blank=True, null=True)
-    content = models.TextField(help_text="Entry here")
-    image = models.ImageField(upload_to="blog/entry_images", blank=True, null=True)
-    objects = models.Manager()
-
-    class Meta:
-        verbose_name_plural = 'entries'
-
-    def __str__(self):
-        if self.heading:
-            return "{entry_title} (Entry) from the {post}".format(
-                entry_title=self.heading,
-                post=str(self.post).lower()
-            )
-        else:
-            return "Entry from a {}".format(str(self.post).lower())
 
 
 # Comments for each post

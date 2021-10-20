@@ -1,17 +1,11 @@
 from django.contrib import admin
-from .models import Author, Post, Tag, Comment, Entry
-
-
-class EntryInline(admin.StackedInline):
-    model = Entry
-    extra = 3
+from .models import Author, Post, Tag, Comment
 
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ['title', 'author', 'published']
     actions = ['publish', 'un_publish', ]
-    inlines = [EntryInline, ]
     exclude = ('published',)
 
     @staticmethod
