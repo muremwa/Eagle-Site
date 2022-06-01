@@ -6,3 +6,4 @@ eagle/db.sqlite3
 secret*
 es/*
 eagle/*/migrations/*
+eagle/wake_s.bat
