@@ -1,13 +1,17 @@
+from datetime import date
+from re import compile as re_compile, search as re_search
+
 from django.views import generic
 from django.shortcuts import get_object_or_404, redirect
 from django.http import Http404
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 from .models import Post
-
-from datetime import date
+from .serializers import PostSerializer
 
 
 class PostsFilter:
+    date_match = re_compile(r'^\d{4}-\d{2}-\d{2}$')
 
     def get_queryset(self):
         q_set = Post.objects.filter(published__exact=True)
@@ -20,23 +24,36 @@ class PostsFilter:
         if 'tag' in self.request.GET:
             q_set = q_set.filter(tags__name__icontains=self.request.GET.get('tag', ''))
 
-        # posts before said date
-        if 'before' in self.request.GET:
-            date_ = [int(i) for i in self.request.GET.get('before', '').split("-")]
-            date_ = date(date_[0], date_[1], date_[2])
-            q_set = q_set.filter(created__lt=date_)
+        try:
+            # posts before said date
+            if 'before' in self.request.GET:
+                _date_ = self.request.GET.get('before', '')
 
-        # posts on the said date
-        if 'on' in self.request.GET:
-            date_ = [int(i) for i in self.request.GET.get('on', '').split("-")]
-            date_ = date(date_[0], date_[1], date_[2])
-            q_set = q_set.filter(created__iexact=date_)
+                if re_search(self.date_match, _date_):
+                    date_ = [int(i) for i in _date_.split("-")]
+                    date_ = date(date_[0], date_[1], date_[2])
+                    q_set = q_set.filter(created__lt=date_)
 
-        # posts after said date
-        if 'after' in self.request.GET:
-            date_ = [int(i) for i in self.request.GET.get('after', '').split("-")]
-            date_ = date(date_[0], date_[1], date_[2])
-            q_set = q_set.filter(created__gt=date_)
+            # posts on the said date
+            if 'on' in self.request.GET:
+                _date_ = self.request.GET.get('on', '')
+
+                if re_search(self.date_match, _date_):
+                    date_ = [int(i) for i in _date_.split("-")]
+                    date_ = date(date_[0], date_[1], date_[2])
+                    q_set = q_set.filter(created__iexact=date_)
+
+            # posts after said date
+            if 'after' in self.request.GET:
+                _date_ = self.request.GET.get('after', '')
+
+                if re_search(self.date_match, _date_):
+                    date_ = [int(i) for i in _date_.split("-")]
+                    date_ = date(date_[0], date_[1], date_[2])
+                    q_set = q_set.filter(created__gt=date_)
+
+        except ValueError:
+            pass
 
         return q_set
 
@@ -80,3 +97,22 @@ class PostPage(generic.DetailView):
         )
 
         return redirect(comment.get_absolute_url())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
