@@ -99,6 +99,9 @@ class PostPage(generic.DetailView):
         return redirect(comment.get_absolute_url())
 
 
+# all posts api
+class AllPostsApi(PostsFilter, ListAPIView):
+    serializer_class = PostSerializer
 
 
 
