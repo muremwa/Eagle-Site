@@ -22,10 +22,20 @@ class Author(models.Model):
 # tag the post
 class Tag(models.Model):
     name = models.CharField(max_length=100)
+    slug = models.SlugField(blank=True, null=True, unique=True)
     objects = models.Manager()
 
     def __str__(self):
         return "Tag for {}".format(self.name)
+
+    def save(self, *args, **kwargs):
+        if self.pk:
+            self.slug = slugify(f'{self.name}-{self.pk}')
+        else:
+            super().save()
+            self.slug = slugify(f'{self.name}-{self.pk}')
+
+        return super().save()
 
 
 # Each blog post
@@ -38,7 +48,7 @@ class Post(models.Model):
         default="blog/default_images/default_feature.png"
     )
     tags = models.ManyToManyField(Tag)
-    slug = models.SlugField(blank=True, null=True)
+    slug = models.SlugField(blank=True, null=True, unique=True)
     published = models.BooleanField(default=False, help_text="IF NOT PUBLISHED IT WILL NOT APPEAR ANYWHERE")
     content = models.TextField(help_text='Enter Content Here')
     objects = models.Manager()
@@ -53,7 +63,12 @@ class Post(models.Model):
         return self.created.strftime("%B %d, %Y")
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f'{self.title}-{self.author.name}-{self.pk}')
+        if self.pk:
+            self.slug = slugify(f'{self.title}-{self.author.name}-{self.pk}')
+        else:
+            super().save()
+            self.slug = slugify(f'{self.title}-{self.author.name}-{self.pk}')
+
         return super().save()
 
     def get_absolute_url(self):
