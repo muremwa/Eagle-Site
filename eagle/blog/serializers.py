@@ -1,4 +1,7 @@
-from rest_framework.serializers import ModelSerializer, CharField, ImageField, IntegerField
+from typing import Any
+
+from rest_framework.serializers import ModelSerializer, CharField, ImageField, IntegerField, EmailField
+from django.shortcuts import get_object_or_404
 
 from .models import Post, Comment, Tag, Author
 
@@ -20,11 +23,21 @@ class TagSerializer(ModelSerializer):
 
 
 class CommentSerializer(ModelSerializer):
-    date = CharField(source='get_date')
+    date = CharField(source='get_date', read_only=True)
+    email = EmailField(write_only=True)
 
     class Meta:
         model = Comment
-        fields = ('id', 'name', 'message', 'date')
+        fields = ('id', 'name', 'message', 'date', 'email')
+
+    def validate(self, attrs: Any) -> Any:
+        slug = self.context.get('view').kwargs.get('slug')
+
+        if slug:
+            post = get_object_or_404(Post, slug=slug)
+            attrs.update({'post_id': post.pk})
+
+        return super().validate(attrs)
 
 
 class PostSerializer(ModelSerializer):

@@ -4,10 +4,10 @@ from re import compile as re_compile, search as re_search
 from django.views import generic
 from django.shortcuts import get_object_or_404, redirect
 from django.http import Http404
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
 
-from .models import Post
-from .serializers import PostSerializer
+from .models import Post, Comment
+from .serializers import PostSerializer, CommentSerializer
 
 
 class PostsFilter:
@@ -104,18 +104,15 @@ class AllPostsApi(PostsFilter, ListAPIView):
     serializer_class = PostSerializer
 
 
+# individual post api
+class PostApi(RetrieveAPIView):
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()
+    lookup_url_kwarg = 'slug'
+    lookup_field = 'slug'
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+# create a new comment
+class CommentCreateApi(CreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer

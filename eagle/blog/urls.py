@@ -12,4 +12,10 @@ urlpatterns = [
 
     # /blog/api/posts/
     path('api/posts/', views.AllPostsApi.as_view(), name='api-home'),
+
+    # /blog/api/posts/post-1/
+    path('api/posts/<slug:slug>/', views.PostApi.as_view(), name='api-post'),
+
+    # /blog/api/posts/post-1/new-comment/
+    path('api/posts/<slug:slug>/new-comment/', views.CommentCreateApi.as_view(), name='comment-create-api'),
 ]
