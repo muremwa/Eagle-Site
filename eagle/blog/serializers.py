@@ -1,6 +1,6 @@
 from typing import Any
 
-from rest_framework.serializers import ModelSerializer, CharField, ImageField, IntegerField, EmailField
+from rest_framework.serializers import ModelSerializer, CharField, ImageField, IntegerField, EmailField, URLField
 from django.shortcuts import get_object_or_404
 
 from .models import Post, Comment, Tag, Author
@@ -49,10 +49,11 @@ class PostSerializer(ModelSerializer):
     tags = TagSerializer(source='tags.all', many=True)
     comments = CommentSerializer(source='comment_set', many=True)
     stamp = IntegerField(source='created_timestamp')
+    comment_url = URLField(source='get_comment_url')
 
     class Meta:
         model = Post
         fields = (
             'id', 'feature_image_url', 'date', 'author', 'comment_count',
-            'title', 'slug', 'tags', 'comments', 'content', 'stamp'
+            'title', 'slug', 'tags', 'comments', 'content', 'stamp', 'comment_url'
         )

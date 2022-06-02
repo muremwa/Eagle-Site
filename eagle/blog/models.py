@@ -91,6 +91,9 @@ class Post(models.Model):
             'slug': self.slug,
         })
 
+    def get_comment_url(self):
+        return reverse('blog:comment-create-api', kwargs={'slug': self.slug})
+
 
 # Comments for each post
 class Comment(models.Model):
