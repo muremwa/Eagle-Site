@@ -7,6 +7,28 @@
 {% block blog %}active{% endblock blog %}
 
 {% block content %}
+    <style type="text/css">
+        .about-author > div {
+            width: 50%;
+        }
+
+
+        @media screen and (max-width: 550px) {
+            .about-author {
+                font-size: 0.7em;
+            }
+        }
+
+        @media screen and (max-width: 390px) {
+            .about-author {
+                flex-direction: column;
+            }
+
+            .about-author > div {
+                width: 100%;
+            }
+        }
+    </style>
 <section class="ftco-section">
     <div class="container mt-5">
         <div class="row justify-content-center mb-5 pb-5">
@@ -67,7 +89,7 @@
             {% endif %}
           </div>   
           
-          <!-- Commeting form -->
+          <!-- Commenting form -->
           <div class="comment-form-wrap pt-5">
             <h3 class="mb-5">Leave a comment</h3>
             <form method="post">
