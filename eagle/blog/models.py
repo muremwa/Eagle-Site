@@ -1,4 +1,5 @@
 import datetime
+import random
 
 from django.db import models
 from django.utils.text import slugify
@@ -59,6 +60,20 @@ class Post(models.Model):
     def __str__(self):
         return "Blog post titled {}".format(self.title)
 
+    @property
+    def created_timestamp(self) -> float:
+        stamp = 0
+
+        if self.created:
+            stamp = self.created.timestamp()
+
+        if self.pk:
+            stamp += self.pk
+        else:
+            stamp += random.randint(1000, 1000000)
+
+        return stamp
+
     def get_date(self):
         return self.created.strftime("%B %d, %Y") if self.created else ''
 
@@ -91,6 +106,20 @@ class Comment(models.Model):
 
     def __str__(self):
         return "Comment by {owner} on a {post}".format(post=str(self.post).lower(), owner=self.name)
+
+    @property
+    def created_timestamp(self) -> float:
+        stamp = 0
+
+        if self.created:
+            stamp = self.created.timestamp()
+
+        if self.pk:
+            stamp += self.pk
+        else:
+            stamp += random.randint(1000, 1000000)
+
+        return stamp
 
     def get_date(self):
         clean_date = self.created + datetime.timedelta(0.125)
