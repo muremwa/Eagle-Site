@@ -60,7 +60,7 @@ class Post(models.Model):
         return "Blog post titled {}".format(self.title)
 
     def get_date(self):
-        return self.created.strftime("%B %d, %Y")
+        return self.created.strftime("%B %d, %Y") if self.created else ''
 
     def save(self, *args, **kwargs):
         if self.pk:
