@@ -14,7 +14,7 @@ class PostsFilter:
     date_match = re_compile(r'^\d{4}-\d{2}-\d{2}$')
 
     def get_queryset(self):
-        q_set = Post.objects.filter(published__exact=True)
+        q_set = Post.objects.filter(published__exact=True).order_by('-created')
 
         # filter by author's name
         if 'author' in self.request.GET:

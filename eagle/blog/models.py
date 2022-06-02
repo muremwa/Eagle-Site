@@ -41,7 +41,7 @@ class Tag(models.Model):
 # Each blog post
 class Post(models.Model):
     title = models.CharField(max_length=100)
-    created = models.DateField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     feature_image = models.ImageField(
         upload_to="blog/feature_images",
