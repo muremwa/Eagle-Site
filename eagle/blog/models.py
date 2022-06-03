@@ -77,6 +77,9 @@ class Post(models.Model):
     def get_date(self):
         return self.created.strftime("%B %d, %Y") if self.created else ''
 
+    def get_easy_date(self):
+        return self.created.strftime("%Y-%m-%d") if self.created else ''
+
     def save(self, *args, **kwargs):
         if self.pk:
             self.slug = slugify(f'{self.title}-{self.author.name}-{self.pk}')

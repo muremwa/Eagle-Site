@@ -50,10 +50,11 @@ class PostSerializer(ModelSerializer):
     comments = CommentSerializer(source='comment_set', many=True)
     stamp = IntegerField(source='created_timestamp')
     comment_url = URLField(source='get_comment_url')
+    easy_date = CharField(source='get_easy_date')
 
     class Meta:
         model = Post
         fields = (
             'id', 'feature_image_url', 'date', 'author', 'comment_count',
-            'title', 'slug', 'tags', 'comments', 'content', 'stamp', 'comment_url'
+            'title', 'slug', 'tags', 'comments', 'content', 'stamp', 'comment_url', 'easy_date'
         )
