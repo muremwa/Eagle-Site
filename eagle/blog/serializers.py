@@ -25,7 +25,7 @@ class TagSerializer(ModelSerializer):
 class CommentSerializer(ModelSerializer):
     date = CharField(source='get_date', read_only=True)
     email = EmailField(write_only=True)
-    stamp = IntegerField(source='created_timestamp')
+    stamp = IntegerField(source='created_timestamp', read_only=True)
 
     class Meta:
         model = Comment
@@ -56,5 +56,5 @@ class PostSerializer(ModelSerializer):
         model = Post
         fields = (
             'id', 'feature_image_url', 'date', 'author', 'comment_count',
-            'title', 'slug', 'tags', 'comments', 'content', 'stamp', 'comment_url', 'easy_date'
+            'title', 'slug', 'tags', 'comments', 'content', 'stamp', 'comment_url', 'easy_date', 'no_feature_image'
         )

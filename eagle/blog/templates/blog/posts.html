@@ -30,7 +30,7 @@
           </a>
           <div class="text p-4 d-block">
             <div class="meta mb-3">
-              <div><a href="{% url 'blog:home' %}?on={{ post.created.isoformat }}">{{ post.get_date }}</a></div>
+              <div><a href="{% url 'blog:home' %}?on={{ post.get_easy_date }}">{{ post.get_date }}</a></div>
               <div><a href="{% url 'blog:home' %}?author={{ post.author.name }}">{{ post.author.name }}</a></div>
               <div><span class="meta-chat"><span class="icon-chat"></span> {{ post.comment_set.count }}</span></div>
             </div>

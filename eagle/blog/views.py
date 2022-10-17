@@ -12,6 +12,17 @@ from .serializers import PostSerializer, CommentSerializer
 
 class PostsFilter:
     date_match = re_compile(r'^\d{4}-\d{2}-\d{2}$')
+    year_match = re_compile(r'^\d{4}')
+    request = None
+
+    def mutate_single_year(self, year_string, begin):
+        date_string = year_string
+
+        if re_search(self.year_match, year_string):
+            suffix = '01-01' if begin else '12-31'
+            date_string = f'{year_string}-{suffix}'
+
+        return date_string
 
     def get_queryset(self):
         q_set = Post.objects.filter(published__exact=True).order_by('-created')
@@ -27,7 +38,7 @@ class PostsFilter:
         try:
             # posts before said date
             if 'before' in self.request.GET:
-                _date_ = self.request.GET.get('before', '')
+                _date_ = self.mutate_single_year(self.request.GET.get('before', ''), True)
 
                 if re_search(self.date_match, _date_):
                     date_ = [int(i) for i in _date_.split("-")]
@@ -40,12 +51,14 @@ class PostsFilter:
 
                 if re_search(self.date_match, _date_):
                     date_ = [int(i) for i in _date_.split("-")]
-                    date_ = date(date_[0], date_[1], date_[2])
-                    q_set = q_set.filter(created__iexact=date_)
+                    date_min = date(date_[0], date_[1], date_[2])
+                    date_max = date(date_[0], date_[1], date_[2] + 1)
+                    q_set = q_set.filter(created__gte=date_min)
+                    q_set = q_set.filter(created__lt=date_max)
 
             # posts after said date
             if 'after' in self.request.GET:
-                _date_ = self.request.GET.get('after', '')
+                _date_ = self.mutate_single_year(self.request.GET.get('after', ''), False)
 
                 if re_search(self.date_match, _date_):
                     date_ = [int(i) for i in _date_.split("-")]

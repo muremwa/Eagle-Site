@@ -74,6 +74,10 @@ class Post(models.Model):
 
         return stamp
 
+    @property
+    def no_feature_image(self):
+        return self.feature_image == 'blog/default_images/default_feature.png'
+
     def get_date(self):
         return self.created.strftime("%B %d, %Y") if self.created else ''
 
