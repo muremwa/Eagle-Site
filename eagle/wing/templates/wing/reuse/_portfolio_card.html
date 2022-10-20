@@ -20,7 +20,7 @@
                     {% endif %}
                     {% if portfolio.github_link and portfolio.download_stats %} <hr class="mike-line" /> {% endif %}
                     {% if portfolio.download_stats %}
-                        <span title="Downloads"><span class="icon-download"></span> <span id="down-{{ portfolio.pk }}">-</span>
+                        <span title="Downloads"><span class="icon-download"></span> <span id="down-{{ portfolio.pk }}">-</span></span>
                     {% endif %}
                 </div>
                 <button id="{{ portfolio.pk }}-refresh" title="Refresh statistics" class="refresh-stats btn btn-primary" onclick="loadStatistics('{{ portfolio.pk }}', '{{ portfolio.github_link}}', '{{ portfolio.download_stats }}')"><span class="icon-refresh2"></span></button>
