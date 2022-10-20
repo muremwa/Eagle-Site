@@ -10,7 +10,7 @@
         <p>{{ portfolio.description }}</p>
         {% if portfolio.github_link or portfolio.download_stats %}
             <div class='stats'>
-                <div class="stats-bar">
+                <div data-id="{{ portfolio.pk }}" data-github-link="{{ portfolio.github_link }}" data-stats-link="{{ portfolio.download_stats }}" class="stats-bar">
                     {% if portfolio.github_link %}
                         <span title="Github pull requests"><span class="ion-ios-git-pull-request"></span> <span id="pulls-{{ portfolio.pk }}">-</span></span> •
                         <span title="Github commits"><span class="ion-ios-git-commit"></span> <span id="commits-{{ portfolio.pk }}">-</span></span> •
@@ -23,7 +23,6 @@
                         <span title="Downloads"><span class="icon-download"></span> <span id="down-{{ portfolio.pk }}">-</span></span>
                     {% endif %}
                 </div>
-                <button id="{{ portfolio.pk }}-refresh" title="Refresh statistics" class="refresh-stats btn btn-primary" onclick="loadStatistics('{{ portfolio.pk }}', '{{ portfolio.github_link}}', '{{ portfolio.download_stats }}')"><span class="icon-refresh2"></span></button>
             </div>
         {% endif %}
         <p><a href="{{ portfolio.link }}">View Project</a></p>

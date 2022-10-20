@@ -1,6 +1,4 @@
 function loadStatistics (id, githubLink, statsLink) {
-    document.getElementById(`${id}-refresh`).disabled = true;
-
     if (githubLink && githubLink !== 'None') {
         // stars & forks
         fetch(`${githubLink}`, {
@@ -43,3 +41,21 @@ function loadStatistics (id, githubLink, statsLink) {
         });
     }
 }
+
+
+const observer = new IntersectionObserver((items) => {
+    items.forEach((item) => {
+        if (item.isIntersecting) {
+            const element = item.target;
+            const args = {...element.dataset};
+            loadStatistics(args['id'], args['githubLink'], args['statsLink']);
+            observer.unobserve(element)
+        }
+    });
+}, {
+    threshold: [0]
+});
+
+[...document.getElementsByClassName('stats-bar')].forEach((element) => {
+    observer.observe(element);
+});
