@@ -2,7 +2,7 @@ from datetime import date
 from re import compile as re_compile, search as re_search
 
 from django.views import generic
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, reverse
 from django.http import Http404
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
 
@@ -77,6 +77,14 @@ class AllPostsPage(PostsFilter, generic.ListView):
     context_object_name = 'posts'
     model = Post
 
+    def get(self, request, *args, **kwargs):
+        if bool(request.GET.get('open')):
+            return super().get(request, *args, **kwargs)
+
+        search_options = request.GET.urlencode()
+        search_suffix = f'?{search_options}' if search_options else ''
+        return redirect(f"{reverse('blog:home')}open/{search_suffix}")
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
         context.update(dict(self.request.GET.items()))
@@ -129,3 +137,7 @@ class PostApi(RetrieveAPIView):
 class CommentCreateApi(CreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+
+
+class BlogApplication(generic.TemplateView):
+    template_name = 'blog/open_blog.html'

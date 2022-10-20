@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from . import views
 
 app_name = "blog"
@@ -18,4 +18,7 @@ urlpatterns = [
 
     # /blog/api/posts/post-1/new-comment/
     path('api/posts/<slug:slug>/new-comment/', views.CommentCreateApi.as_view(), name='comment-create-api'),
+
+    # blog/open/
+    re_path(r'open/(?P<path>.*)', views.BlogApplication.as_view(), name='home-open'),
 ]
